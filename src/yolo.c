@@ -9,13 +9,19 @@
 #include "opencv2/highgui/highgui_c.h"
 #endif
 
-char *voc_names[] = {"aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"};
-image voc_labels[20];
+// char *voc_names[] = {"aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"};
+// image voc_labels[20];
+
+char *voc_names[] = {"pole", "misc"};
+image voc_labels[2];
 
 void train_yolo(char *cfgfile, char *weightfile)
 {
-    char *train_images = "/data/voc/train.txt";
-    char *backup_directory = "/home/pjreddie/backup/";
+    // char *train_images = "/data/voc/train.txt";
+    // char *backup_directory = "/home/pjreddie/backup/";
+    char *train_images = "/home/rezaf/projects/rezaf/roames/YOLO/poles_notpoles.txt";
+    char *backup_directory = "/home/rezaf/projects/rezaf/roames/YOLO/backup";
+
     srand(time(0));
     data_seed = time(0);
     char *base = basecfg(cfgfile);

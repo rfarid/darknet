@@ -3073,16 +3073,16 @@ static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc
 {
    int i;
    for (i=0; i < count; ++i) {
-      int y_fixed = (y[i] << 20) + (1<<19); // rounding
+      int y_fixed = (y[i] << 20) + (1<<19); // rounding // TODO: 20?? 19??
       int r,g,b;
       int cr = pcr[i] - 128;
       int cb = pcb[i] - 128;
       r = y_fixed +  cr* float2fixed(1.40200f);
       g = y_fixed + (cr*-float2fixed(0.71414f)) + ((cb*-float2fixed(0.34414f)) & 0xffff0000);
       b = y_fixed                               +   cb* float2fixed(1.77200f);
-      r >>= 20;
-      g >>= 20;
-      b >>= 20;
+      r >>= 20; // TODO: 20??
+      g >>= 20; // TODO: 20??
+      b >>= 20; // TODO: 20??
       if ((unsigned) r > 255) { if (r < 0) r = 0; else r = 255; }
       if ((unsigned) g > 255) { if (g < 0) g = 0; else g = 255; }
       if ((unsigned) b > 255) { if (b < 0) b = 0; else b = 255; }
@@ -3208,16 +3208,16 @@ static void stbi__YCbCr_to_RGB_simd(stbi_uc *out, stbi_uc const *y, stbi_uc cons
 #endif
 
    for (; i < count; ++i) {
-      int y_fixed = (y[i] << 20) + (1<<19); // rounding
+      int y_fixed = (y[i] << 20) + (1<<19); // rounding // TODO: 20?? 19??
       int r,g,b;
       int cr = pcr[i] - 128;
       int cb = pcb[i] - 128;
       r = y_fixed + cr* float2fixed(1.40200f);
       g = y_fixed + cr*-float2fixed(0.71414f) + ((cb*-float2fixed(0.34414f)) & 0xffff0000);
       b = y_fixed                             +   cb* float2fixed(1.77200f);
-      r >>= 20;
-      g >>= 20;
-      b >>= 20;
+      r >>= 20; // TODO: 20??
+      g >>= 20; // TODO: 20??
+      b >>= 20; // TODO: 20??
       if ((unsigned) r > 255) { if (r < 0) r = 0; else r = 255; }
       if ((unsigned) g > 255) { if (g < 0) g = 0; else g = 255; }
       if ((unsigned) b > 255) { if (b < 0) b = 0; else b = 255; }

@@ -22,6 +22,9 @@ detection_layer make_detection_layer(int batch, int inputs, int n, int side, int
     l.coords = coords;
     l.rescore = rescore;
     l.side = side;
+
+    printf("side=%d,coords=%d,n=%d,classes=%d==inputs=%d", side,l.coords,l.n,l.classes,inputs);    
+
     assert(side*side*((1 + l.coords)*l.n + l.classes) == inputs);
     l.cost = calloc(1, sizeof(float));
     l.outputs = l.inputs;

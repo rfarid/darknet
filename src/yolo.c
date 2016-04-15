@@ -12,7 +12,7 @@
 #endif
 
 // char *voc_names[] = {"aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"};
-// image voc_labels[20];
+// image voc_labels[NUM_CLASSES]; //20
 
 char *voc_names[] = {"pole", "misc"};
 image voc_labels[NUM_CLASSES];
@@ -408,6 +408,7 @@ void demo_yolo(char *cfgfile, char *weightfile, float thresh, int cam_index, cha
 void run_yolo(int argc, char **argv)
 {
     int i;
+    printf("\nnum_of_Classes=%d",NUM_CLASSES);
     for(i = 0; i < NUM_CLASSES; ++i){
         char buff[256];
         sprintf(buff, "data/labels/%s.png", voc_names[i]);
@@ -424,6 +425,7 @@ void run_yolo(int argc, char **argv)
     char *cfg = argv[3];
     char *weights = (argc > 4) ? argv[4] : 0;
     char *filename = (argc > 5) ? argv[5]: 0;
+    printf("filename=%s",filename);
     if(0==strcmp(argv[2], "test")) test_yolo(cfg, weights, filename, thresh);
     else if(0==strcmp(argv[2], "train")) train_yolo(cfg, weights);
     else if(0==strcmp(argv[2], "valid")) validate_yolo(cfg, weights);

@@ -2,6 +2,8 @@
 #include "curand.h"
 #include "cublas_v2.h"
 
+#include "settings.h"
+
 extern "C" {
 #include "network.h"
 #include "detection_layer.h"
@@ -59,9 +61,9 @@ void *detect_in_thread(void *ptr)
     printf("\033[2J");
     printf("\033[1;1H");
     printf("\nFPS:%.0f\n",fps);
+    printf("NUM_CLASSES=%d\n",NUM_CLASSES);    
     printf("Objects:\n\n");
-    //draw_detections(det, l.side*l.side*l.n, demo_thresh, boxes, probs, voc_names, voc_labels, 20);
-    draw_detections(det, l.side*l.side*l.n, demo_thresh, boxes, probs, voc_names, voc_labels, 2);    
+    draw_detections(det, l.side*l.side*l.n, demo_thresh, boxes, probs, voc_names, voc_labels, NUM_CLASSES);  // , 20  
     return 0;
 }
 
